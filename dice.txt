@@ -1,0 +1,24 @@
+DROP DATABASE IF EXISTS `dice`;											#2
+
+CREATE DATABASE IF NOT EXISTS `dice` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE `dice`;
+
+CREATE TABLE `experiment` (	`id_exp` 	INT NOT NULL AUTO_INCREMENT,
+				`date` 		VARCHAR(30) NOT NULL,
+				`time`		VARCHAR(30) NOT NULL,
+				`name`		VARCHAR(30) NOT NULL,
+				`bones_num`	INT(10) NOT NULL,
+				`throws`	INT(10) NOT NULL,
+			
+					PRIMARY KEY (`id_exp`)) ENGINE=INNODB;
+
+CREATE TABLE `result` (`id_result`	INT(10) NOT NULL AUTO_INCREMENT,
+			`num` 		INT(10) NOT NULL,
+			`count` 	INT(10) NOT NULL,	
+			`id_exp` 	INT(11) NOT NULL,
+			
+					PRIMARY KEY (id_result),
+                     			FOREIGN KEY (id_exp) REFERENCES `experiment` (id_exp) 
+					ON UPDATE CASCADE
+					ON DELETE CASCADE) ENGINE=INNODB;
